@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+option go_package = "./src/wallet";
+
+package proto;
+
+service Wallet {
+  rpc CreateWallet(CreateWalletRequest) returns (CreateWalletResponse) {}
+  rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse) {}
+  rpc Deposit(DepositRequest) returns (DepositResponse) {}
+  rpc Withdraw(WithdrawRequest) returns (WithdrawResponse) {}
+  rpc TxnHistory(TxnHistoryRequest) returns (TxnHistoryResponse) {}
+}
+
+enum WALLET_CURRENCY {
+  USD = 0;
+  BTC = 1;
+  ETC = 2;
+}
+
+message CreateWalletRequest {
+  string user_id = 1;
+  WALLET_CURRENCY currency = 2;
+}
+
+message CreateWalletResponse {
+  string user_id = 1;
+  int64 balance = 2;
+  WALLET_CURRENCY currency = 3;
+}
+
+message GetBalanceRequest {
+  string user_id = 1;
+  WALLET_CURRENCY currency = 2;
+}
+
+message GetBalanceResponse {
+  int64 balance = 1;
+  WALLET_CURRENCY currency = 2;
+}
+
+message DepositRequest {
+  string user_id = 1;
+  int64 amount = 2;
+  WALLET_CURRENCY currency = 3;
+}
+
+message DepositResponse {
+  int64 balance = 1;
+  WALLET_CURRENCY currency = 2;
+}
+
+message WithdrawRequest {
+  string user_id = 1;
+  int64 amount = 2;
+  WALLET_CURRENCY currency = 3;
+}
+
+message WithdrawResponse {
+  int64 balance = 1;
+  WALLET_CURRENCY currency = 2;
+}
+
+message TxnHistoryRequest {
+  string user_id = 1;
+  WALLET_CURRENCY currency = 2;
+  int32 page = 3;
+  int32 size = 4;
+}
+
+message TxnHistoryResponse {
+  message TxnRecord {
+    int64 timestamp = 1;
+    int64 amount = 2;
+  }
+  string user_id = 1;
+  WALLET_CURRENCY currency = 2;
+  int32 total =3;
+  int32 page = 4;
+  int32 size = 5;
+  repeated TxnRecord data = 6;
+}
