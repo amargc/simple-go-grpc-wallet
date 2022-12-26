@@ -4,7 +4,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/amargc/imple-go-grpc-wallet/src/wallet"
+	"github.com/amargc/simple-go-grpc-wallet/src/wallet"
 	"google.golang.org/grpc"
 )
 

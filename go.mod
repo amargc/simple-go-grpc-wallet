@@ -1,4 +1,4 @@
-module github.com/amargc/imple-go-grpc-wallet
+module github.com/amargc/simple-go-grpc-wallet
 
 go 1.18
 
